@@ -9,8 +9,8 @@ import requests
 # ============================================================
 # API 配置 —— 请在此填入你的 API Key
 # ============================================================
-DEEPSEEK_API_KEY = "sk-your-deepseek-api-key-here"
-QWEN_API_KEY = "sk-your-qwen-api-key-here"
+DEEPSEEK_API_KEY = "sk-your-deepseek-api-key-here"  # 请替换为你的 DeepSeek API Key
+QWEN_API_KEY = "sk-your-qwen-api-key-here"          # 请替换为你的阿里云 Qwen API Key
 
 # API 端点
 DEEPSEEK_CHAT_URL = "https://api.deepseek.com/v1/chat/completions"

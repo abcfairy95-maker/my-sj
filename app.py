@@ -112,14 +112,14 @@ html, body { margin: 0; padding: 0; min-height: 100%; background: var(--bg) !imp
 
 /* ─── 侧边栏 ─── */
 .app-sidebar { width: 120px !important; min-width: 100px !important; max-width: 140px !important; flex-shrink: 0 !important; min-height: 100vh !important; display: flex !important; flex-direction: column !important; padding: 14px 6px 10px 8px !important; border-right: 1px solid var(--border) !important; }
-.sb-brand { font-family: 'ZCOOL XiaoWei', 'Noto Sans SC', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+.sb-brand { font-family: 'ZCOOL XiaoWei', 'Noto Sans SC', sans-serif; font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 2px; line-height: 1.2; }
 .sb-brand em { font-style: normal; color: var(--brand); }
-.sb-desc { font-family: 'Noto Sans SC', sans-serif; font-size: 10px; font-weight: 400; color: var(--text2); margin-bottom: 10px; }
-.sb-sec { font-family: 'Noto Sans SC', sans-serif; font-size: 9px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; padding: 0 4px; }
-.sb-item { display: flex; align-items: center; gap: 4px; padding: 3px 4px; margin-bottom: 0; border-radius: 3px; font-family: 'Noto Sans SC', sans-serif; font-size: 10px; font-weight: 400; color: var(--text2); cursor: pointer; user-select: none; transition: all 0.1s ease; }
+.sb-desc { font-family: 'Noto Sans SC', sans-serif; font-size: 12px; font-weight: 400; color: var(--text2); margin-bottom: 10px; }
+.sb-sec { font-family: 'Noto Sans SC', sans-serif; font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; padding: 0 4px; }
+.sb-item { display: flex; align-items: center; gap: 4px; padding: 3px 4px; margin-bottom: 0; border-radius: 3px; font-family: 'Noto Sans SC', sans-serif; font-size: 12px; font-weight: 400; color: var(--text2); cursor: pointer; user-select: none; transition: all 0.1s ease; }
 .sb-item:hover { background: var(--brand-bg); color: var(--brand); }
-.sb-item .ico { font-size: 11px; width: 14px; text-align: center; }
-.sb-foot { margin-top: auto; padding-top: 6px; border-top: 1px solid var(--border); font-family: 'Noto Sans SC', sans-serif; font-size: 8px; color: var(--text3); line-height: 1.4; }
+.sb-item .ico { font-size: 13px; width: 16px; text-align: center; }
+.sb-foot { margin-top: auto; padding-top: 6px; border-top: 1px solid var(--border); font-family: 'Noto Sans SC', sans-serif; font-size: 9px; color: var(--text3); line-height: 1.4; }
 
 .app-main { flex: 1 !important; min-width: 0 !important; min-height: 100vh !important; height: auto !important; display: flex !important; flex-direction: column !important; padding: 12px 20px 12px 20px !important; }
 
@@ -189,14 +189,14 @@ SIDEBAR_ITEMS = [
 ]
 
 SUGGEST_ITEMS = [
-    "📚 图书馆周末几点开门？",
-    "🏠 宿舍晚上几点关门？",
-    "🍜 食堂可以用现金吗？",
-    "🚌 校园网怎么连接？",
-    "🎓 国家奖学金申请条件？",
-    "🏥 校医院在哪里？",
-    "🔥 火把节放不放假？",
-    "📖 毕业论文什么时候答辩？",
+    ("📚", "图书馆周末几点开门？"),
+    ("🏠", "宿舍晚上几点关门？"),
+    ("🍜", "食堂可以用现金吗？"),
+    ("🚌", "校园网怎么连接？"),
+    ("🎓", "国家奖学金申请条件？"),
+    ("🏥", "校医院在哪里？"),
+    ("🔥", "火把节放不放假？"),
+    ("📖", "毕业论文什么时候答辩？"),
 ]
 
 def build_ui():
@@ -257,9 +257,9 @@ def build_ui():
                     """)
 
                     suggest_html = '<div class="suggest-wrap">'
-                    for item in SUGGEST_ITEMS:
-                        escaped = item.replace("'", "\\'")
-                        suggest_html += f'<span class="suggest-item" onclick="(function(){{try{{const ta=document.querySelector(\'textarea\');if(ta){{const ns=Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,\'value\').set;ns.call(ta,\'{escaped}\');ta.dispatchEvent(new Event(\'input\',{{bubbles:true,composed:true}}));ta.dispatchEvent(new Event(\'enter\',{{bubbles:true}}));setTimeout(function(){{const btn=document.querySelector(\'button[type=submit]\')||document.querySelector(\'button:not([disabled])\');if(btn)btn.click()}},50)}}catch(e){{console.log(e)}}}})()">{item}</span>'
+                    for ico, text in SUGGEST_ITEMS:
+                        escaped = text.replace("'", "\\'")
+                        suggest_html += f'<span class="suggest-item" onclick="(function(){{try{{const ta=document.querySelector(\'textarea\');if(ta){{const ns=Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,\'value\').set;ns.call(ta,\'{escaped}\');ta.dispatchEvent(new Event(\'input\',{{bubbles:true}}));ta.focus()}}}}catch(e){{}}}})()">{ico} {text}</span>'
                     suggest_html += '</div>'
                     gr.HTML(suggest_html)
 
