@@ -1,0 +1,9 @@
+__pycache__/
+chroma_db/
+.gradio/
+*.pyc
+.DS_Store
+test_*.py
+gradio_output.txt
+gradio_error.txt
+verify.py
