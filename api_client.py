@@ -9,8 +9,8 @@ import requests
 # ============================================================
 # API 配置 —— 请在此填入你的 API Key
 # ============================================================
-DEEPSEEK_API_KEY = "sk-dae2a579ff6b4227b126f315ee636dcc"
-QWEN_API_KEY = "sk-ws-H.EMDHMLI.sxb2.MEQCIFJyL9xbpgxw97NHsX22yQey-Jd5fbs3Lk7VvsXyn6DxAiAG6g62yWaLsIxvNVWySWkBxLrg6CrgN8ir8pxYaScQnQ"
+DEEPSEEK_API_KEY = "sk-your-deepseek-api-key-here"
+QWEN_API_KEY = "sk-your-qwen-api-key-here"
 
 # API 端点
 DEEPSEEK_CHAT_URL = "https://api.deepseek.com/v1/chat/completions"
