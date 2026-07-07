@@ -84,7 +84,7 @@ def build_modal_html():
     for label, filename in SIDEBAR_DOC_MAP.items():
         html_content = DOC_HTML_CACHE.get(filename, "<p>加载失败</p>")
         doc_divs += f'<div id="doc-{label}" style="display:none">{html_content}</div>\n'
-    return f"""
+    return f"""{doc_divs}
     <div class="doc-overlay" id="docOverlay" onclick="if(event.target===this)closeDoc()">
         <div class="doc-modal"><div class="doc-modal-head">
             <span class="doc-modal-title" id="docTitle">文档</span>
@@ -114,7 +114,7 @@ CUSTOM_CSS = """@import url('https://fonts.googleapis.com/css2?family=Inter:wght
 :root{--brand:#6F4A8E;--brand-light:#A07FC0;--brand-bg:rgba(111,74,142,0.04);--bg:#F7F4F9;--card:#FFF;--text:#1E1F23;--text2:#6A6E78;--text3:#ADB0B8;--border:#E8E3EC;--green:#789978;--green-bg:rgba(120,153,120,0.07);--shadow:0 8px 32px rgba(111,74,142,0.05)}
 *{-webkit-font-smoothing:antialiased}
 body{background:var(--bg)!important;margin:0}
-.gradio-container{background:var(--bg)!important;min-height:100vh!important;display:flex!important;align-items:flex-start!important;justify-content:center!important}
+.gradio-container{background:var(--bg)!important;min-height:100vh!important;display:flex!important;flex-direction:column!important}
 /* 花瓣 */
 @keyframes petalFall{0%{transform:translateY(-10vh) rotate(0deg) scale(0.4);opacity:0}8%{opacity:0.12}85%{opacity:0.06}100%{transform:translateY(110vh) rotate(720deg) scale(0.7);opacity:0}}
 .deco-bg .bg-petal{position:fixed;top:-10vh;z-index:0;pointer-events:none;animation:petalFall 22s linear infinite}
@@ -150,16 +150,16 @@ body{background:var(--bg)!important;margin:0}
 .navbar{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.6)}
 .nav-left{display:flex;align-items:center;gap:10px}
 .nav-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-light));display:flex;align-items:center;justify-content:center;font-size:14px;color:white}
-.nav-title{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.3px}
-.nav-title-sub{font-size:12px;color:var(--text2)}
+.nav-title{font-size:28px;font-weight:700;color:var(--brand);letter-spacing:.5px;font-family:'Noto Serif SC','Inter',serif}
+.nav-title-sub{font-size:14px;color:var(--text2)}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-stat{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--green-bg);animation:pulse 2.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.2}}
 /* 主布局 */
-.main-page{display:flex!important;flex-direction:column!important;height:100vh!important;overflow:hidden!important;width:100%!important}
-.app-wrap{display:flex!important;flex:1!important;min-height:0!important;padding:0 2px!important;gap:6px!important}
-.sidebar{width:15%!important;min-width:120px!important;max-width:160px!important;flex-shrink:0!important}
+.main-page{display:flex!important;flex-direction:column!important;flex:1!important;height:100vh!important;overflow:hidden!important;width:100%!important}
+.app-wrap{display:flex!important;flex:1!important;min-height:0!important;padding:0 1px!important;gap:4px!important}
+.sidebar{width:15%!important;min-width:130px!important;max-width:170px!important;flex-shrink:0!important}
 .sb-header{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;margin-bottom:8px;padding:0 4px}
 .sb-grid{display:flex;flex-direction:column;gap:1px;margin-bottom:8px}
 .sb-item{display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:4px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .12s ease}
@@ -306,19 +306,19 @@ def build_ui():
                 cid = c["id"]
                 title = c.get("title", "新对话")[:25]
                 safe = title.replace("'","\\'")
-                html += f'<div class="hist-item" onclick="loadHist2({cid})"><span class="hist-title">{safe}</span><span class="hist-del" onclick="event.stopPropagation();delHist2({cid})">x</span></div>'
+                html += f'<div class="hist-item" data-id="{cid}"><span class="hist-title">{safe}</span><span class="hist-del" data-id="{cid}">x</span></div>'
             return html
 
         convs_state.change(refresh_hist, [convs_state], [hist_html])
 
         # ======== 新对话 ========
         def do_new_chat():
-            if not SESSION["user_id"]: return gr.update()
+            if not SESSION["user_id"]: return gr.update(), []
             cid = auth.create_conversation(SESSION["user_id"], "新对话")
             SESSION["conv_id"] = cid; SESSION["messages"] = []
-            return auth.get_user_conversations(SESSION["user_id"])
+            return auth.get_user_conversations(SESSION["user_id"]), []
 
-        newchat_btn.click(do_new_chat, None, [convs_state])
+        newchat_btn.click(do_new_chat, None, [convs_state, chat_state])
 
         # ======== 加载/删除对话 ========
         def do_load_conv(cid_str):
@@ -350,9 +350,9 @@ def build_ui():
         def do_logout():
             SESSION["user_id"] = None; SESSION["username"] = None
             SESSION["conv_id"] = None; SESSION["messages"] = []
-            return gr.update(visible=True), gr.update(visible=False), gr.update(visible=False)
+            return gr.update(visible=True), gr.update(visible=False), gr.update(visible=False), gr.update()
 
-        logout_btn.click(do_logout, None, [login_page, main_page, reg_page])
+        logout_btn.click(do_logout, None, [login_page, main_page, reg_page, convs_state])
 
     return demo
 
@@ -361,5 +361,5 @@ if __name__ == "__main__":
     demo.launch(
         server_name="127.0.0.1", server_port=7860, share=False, show_error=True,
         css=CUSTOM_CSS, theme=gr.themes.Soft(),
-        js="""function openDoc(l,t){var b=document.getElementById('docBody');var s=document.getElementById('doc-'+l);b.innerHTML=s?s.innerHTML:'<p>...</p>';document.getElementById('docTitle').textContent='📄 '+t;document.getElementById('docOverlay').classList.add('active');b.scrollTop=0;}function closeDoc(){document.getElementById('docOverlay').classList.remove('active');document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDoc();});}function loadHist2(id){var i=document.getElementById('convIdBridge');if(i){i.value=String(id);i.dispatchEvent(new Event('input',{bubbles:true}));var b=document.getElementById('loadTrigger');if(b)b.click();}}function delHist2(id){if(!confirm('确定删除此对话？'))return;var i=document.getElementById('convIdBridge');if(i){i.value=String(id);i.dispatchEvent(new Event('input',{bubbles:true}));var b=document.getElementById('delTrigger');if(b)b.click();}}""",
+        js="""window.openDoc=function(l,t){var b=document.getElementById('docBody'),s=document.getElementById('doc-'+l);if(b&&s){b.innerHTML=s.innerHTML;document.getElementById('docTitle').textContent='📄 '+t;document.getElementById('docOverlay').classList.add('active');b.scrollTop=0;}};window.closeDoc=function(){document.getElementById('docOverlay').classList.remove('active');};document.addEventListener('keydown',function(e){if(e.key==='Escape')window.closeDoc();});if(!window._histBound){window._histBound=true;document.addEventListener('click',function(e){var t=e.target.closest('.hist-item');if(t&&!e.target.closest('.hist-del')){var id=t.getAttribute('data-id');if(id){var i=document.getElementById('convIdBridge');if(i){i.value=id;i.dispatchEvent(new Event('input',{bubbles:true}));var b=document.getElementById('loadTrigger');if(b)b.click();}}}});document.addEventListener('click',function(e){var d=e.target.closest('.hist-del');if(d){e.stopPropagation();var id=d.getAttribute('data-id');if(id&&confirm('确定删除此对话？')){var i=document.getElementById('convIdBridge');if(i){i.value=id;i.dispatchEvent(new Event('input',{bubbles:true}));var b=document.getElementById('delTrigger');if(b)b.click();}}}});}""",
     )
