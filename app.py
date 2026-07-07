@@ -93,9 +93,10 @@ def build_modal_html():
     </div>"""
 
 def build_welcome_html():
-    return """<div class="welcome-card"><div class="welcome-avatar">🤗</div>
-    <div class="welcome-text"><div class="welcome-title">同学你好呀！</div>
-    <div class="welcome-sub">我是楚雄师范学院的小助手，关于校园生活的问题尽管问我！</div></div></div>"""
+    return """<div class="welcome-card"><div class="welcome-avatar">🎓</div>
+    <div class="welcome-text"><div class="welcome-title">🎉 欢迎来到楚雄师范学院校园智能助手！</div>
+    <div class="welcome-sub">我是你的校园AI小助手，背后有200条校园知识库。无论是宿舍几点关门、图书馆几点开门、奖学金怎么申请，还是教务选课、食堂用餐、校园网络、心理咨询……关于校园生活的任何问题，随时问我！</div>
+    <div class="welcome-tip">💡 试试点击下方的推荐问题，或者直接输入你的问题～</div></div></div>"""
 
 def build_chips_html():
     chips = ""
@@ -110,29 +111,50 @@ SIDEBAR_ITEMS = [
     ("🚗", "出行"), ("🧠", "心理"), ("🎒", "新生"), ("📋", "毕业"),
 ]
 
-CUSTOM_CSS = """@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Liu+Jian+Mao+Cao&display=swap');
+CUSTOM_CSS = """@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+KuaiLe&display=swap');
 :root{--brand:#6F4A8E;--brand-light:#A07FC0;--brand-bg:rgba(111,74,142,0.04);--bg:#F7F4F9;--card:#FFF;--text:#1E1F23;--text2:#6A6E78;--text3:#ADB0B8;--border:#E8E3EC;--green:#789978;--green-bg:rgba(120,153,120,0.07);--shadow:0 8px 32px rgba(111,74,142,0.05)}
 *{-webkit-font-smoothing:antialiased}
 body{background:var(--bg)!important;margin:0}
 .gradio-container{background:var(--bg)!important;min-height:100vh!important;display:flex!important;flex-direction:column!important}
-/* 花瓣 */
-@keyframes petalFall{0%{transform:translateY(-10vh) rotate(0deg) scale(0.4);opacity:0}8%{opacity:0.12}85%{opacity:0.06}100%{transform:translateY(110vh) rotate(720deg) scale(0.7);opacity:0}}
-.deco-bg .bg-petal{position:fixed;top:-10vh;z-index:0;pointer-events:none;animation:petalFall 22s linear infinite}
-.deco-bg .bg-petal:nth-child(1){left:2%;font-size:28px}.deco-bg .bg-petal:nth-child(2){left:14%;animation-delay:3s;font-size:22px}
-.deco-bg .bg-petal:nth-child(3){left:26%;animation-delay:6s;font-size:32px}.deco-bg .bg-petal:nth-child(4){left:38%;animation-delay:1.5s;font-size:26px}
-.deco-bg .bg-petal:nth-child(5){left:50%;animation-delay:5s;font-size:30px}.deco-bg .bg-petal:nth-child(6){left:62%;animation-delay:3.5s;font-size:24px}
-.deco-bg .bg-petal:nth-child(7){left:74%;animation-delay:7s;font-size:28px}.deco-bg .bg-petal:nth-child(8){left:86%;animation-delay:2s;font-size:26px}
-.deco-bg .bg-petal:nth-child(9){left:92%;animation-delay:4.5s;font-size:32px}.deco-bg .bg-petal:nth-child(10){left:96%;animation-delay:6.5s;font-size:24px}
+/* 花瓣 - 随机飘落 */
+@keyframes petalFall{0%{transform:translateY(-8vh) rotate(0deg) scale(0.4);opacity:0}8%{opacity:0.2}92%{opacity:0.1}100%{transform:translateY(108vh) rotate(720deg) scale(1.1);opacity:0}}
+@keyframes petalFall2{0%{transform:translateY(-8vh) rotate(0deg) scale(0.5);opacity:0}10%{opacity:0.18}90%{opacity:0.08}100%{transform:translateY(108vh) rotate(-540deg) scale(0.9);opacity:0}}
+@keyframes petalFall3{0%{transform:translateY(-8vh) rotate(0deg) scale(0.6);opacity:0}6%{opacity:0.15}94%{opacity:0.1}100%{transform:translateY(108vh) rotate(360deg) scale(1);opacity:0}}
+.deco-bg .bg-petal{position:fixed;top:-8vh;z-index:0;pointer-events:none}
+.deco-bg .bg-petal:nth-child(1){left:4%;font-size:36px;animation:petalFall 38s linear infinite 0s}
+.deco-bg .bg-petal:nth-child(2){left:14%;font-size:26px;animation:petalFall2 42s linear infinite 6s}
+.deco-bg .bg-petal:nth-child(3){left:22%;font-size:44px;animation:petalFall3 35s linear infinite 12s}
+.deco-bg .bg-petal:nth-child(4){left:30%;font-size:30px;animation:petalFall 45s linear infinite 3s}
+.deco-bg .bg-petal:nth-child(5){left:38%;font-size:40px;animation:petalFall2 39s linear infinite 18s}
+.deco-bg .bg-petal:nth-child(6){left:46%;font-size:28px;animation:petalFall3 48s linear infinite 9s}
+.deco-bg .bg-petal:nth-child(7){left:54%;font-size:42px;animation:petalFall 36s linear infinite 21s}
+.deco-bg .bg-petal:nth-child(8){left:62%;font-size:32px;animation:petalFall2 44s linear infinite 15s}
+.deco-bg .bg-petal:nth-child(9){left:70%;font-size:46px;animation:petalFall3 40s linear infinite 24s}
+.deco-bg .bg-petal:nth-child(10){left:78%;font-size:34px;animation:petalFall 43s linear infinite 7s}
+.deco-bg .bg-petal:nth-child(11){left:86%;font-size:28px;animation:petalFall2 37s linear infinite 27s}
+.deco-bg .bg-petal:nth-child(12){left:94%;font-size:38px;animation:petalFall3 46s linear infinite 2s}
 /* 底部装饰 */
-@keyframes rockWave{0%,100%{transform:translateY(0) rotate(-3deg);opacity:0.06}50%{transform:translateY(-6px) rotate(3deg);opacity:0.1}}
-@keyframes shroomFloat{0%,100%{transform:translateY(0);opacity:0.04}50%{transform:translateY(-10px);opacity:0.07}}
-@keyframes fireGlow{0%,100%{opacity:0.04;transform:scale(1)}50%{opacity:0.08;transform:scale(1.15)}}
+@keyframes rockWave{0%,100%{transform:translateY(0) rotate(-3deg);opacity:0.07}50%{transform:translateY(-7px) rotate(3deg);opacity:0.12}}
+@keyframes shroomFloat{0%,100%{transform:translateY(0);opacity:0.05}50%{transform:translateY(-12px);opacity:0.09}}
+@keyframes fireGlow{0%,100%{opacity:0.05;transform:scale(1)}50%{opacity:0.1;transform:scale(1.2)}}
 @keyframes sundialRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.deco-bottom{position:fixed;bottom:0;left:0;right:0;z-index:9999;pointer-events:none;height:120px}
-.yuanmou-man{position:fixed;bottom:25px;right:40px;font-size:42px;animation:rockWave 5s ease-in-out infinite;z-index:9999}
-.shroom{position:fixed;bottom:20px;font-size:26px;animation:shroomFloat 4.5s ease-in-out infinite;z-index:9999}
-.shroom1{left:280px}.shroom2{left:345px;animation-delay:.8s}.shroom3{left:410px;animation-delay:1.6s}
-.shroom4{left:475px;animation-delay:2.4s}.shroom5{left:540px;animation-delay:3.2s}
+.deco-bottom{position:fixed;bottom:0;left:0;right:0;z-index:9999;pointer-events:none;height:140px}
+/* 元谋人 - 错开不重叠 */
+.yuanmou-man{position:fixed;font-size:36px;animation:rockWave 5s ease-in-out infinite;z-index:9999}
+.yuanmou1{bottom:20px;right:25px;font-size:44px}
+.yuanmou2{bottom:35px;left:6%;font-size:28px;animation-delay:1.8s;animation-duration:6s;opacity:0.5}
+.yuanmou3{bottom:25px;left:28%;font-size:22px;animation-delay:3.2s;animation-duration:4.5s;opacity:0.35}
+/* 蘑菇 - 野生菌不同样子不同大小错开放置 */
+.shroom{position:fixed;bottom:12px;z-index:9999;animation:shroomFloat 4.5s ease-in-out infinite}
+.shroom1{left:15%;font-size:26px;animation-duration:4.8s}
+.shroom2{left:24%;font-size:18px;animation-delay:.8s;animation-duration:5.2s}
+.shroom3{left:33%;font-size:30px;animation-delay:1.6s;animation-duration:4s}
+.shroom4{left:42%;font-size:20px;animation-delay:2.4s;animation-duration:5.5s}
+.shroom5{left:51%;font-size:28px;animation-delay:3s;animation-duration:4.2s}
+.shroom6{left:60%;font-size:16px;animation-delay:3.8s;animation-duration:5.8s}
+.shroom7{left:69%;font-size:24px;animation-delay:1.2s;animation-duration:4.6s}
+.shroom8{left:78%;font-size:32px;animation-delay:4.4s;animation-duration:5s}
+.shroom9{left:87%;font-size:20px;animation-delay:2s;animation-duration:5.4s}
 /* 火把 */
 .torch-deco{position:fixed;bottom:35px;left:35px;font-size:30px;animation:fireGlow 3s ease-in-out infinite;z-index:9999}
 /* 太阳历 */
@@ -152,11 +174,13 @@ body{background:var(--bg)!important;margin:0}
 .login-reglink{font-size:13px;color:var(--text2);margin-top:12px;text-align:center}
 .reg-link{color:#36c;cursor:pointer;font-weight:500;text-decoration:underline}
 .reg-link:hover{color:#1a4fa0}
+.reg-link-btn{color:#3366CC!important;background:none!important;border:none!important;text-decoration:underline!important;padding:0!important;font-size:13px!important;font-weight:500!important;cursor:pointer!important;box-shadow:none!important;min-width:0!important;width:auto!important;height:auto!important;border-radius:0!important}
+.reg-link-btn:hover{color:#1a4fa0!important;background:none!important;transform:none!important;box-shadow:none!important}
 /* 导航 */
 .navbar{display:flex;align-items:center;justify-content:space-between;padding:4px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.6);flex-shrink:0}
 .nav-left{display:flex;align-items:center;gap:8px}
 .nav-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-light));display:flex;align-items:center;justify-content:center;font-size:14px;color:white}
-.nav-title{font-size:32px;font-weight:400;color:var(--brand);letter-spacing:4px;font-family:'Liu Jian Mao Cao','Ma Shan Zheng','Noto Serif SC',serif;line-height:1.1;transform:scaleY(1.05)}
+.nav-title{font-size:34px;font-weight:400;color:var(--brand);letter-spacing:3px;font-family:'ZCOOL KuaiLe','Noto Serif SC',serif;line-height:1.15}
 .nav-title-sub{font-size:14px;color:var(--text2);font-family:'Noto Serif SC',serif}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-stat{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px}
@@ -164,33 +188,45 @@ body{background:var(--bg)!important;margin:0}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.2}}
 /* 主布局 */
 .main-page{display:flex!important;flex-direction:column!important;flex:1!important;height:100vh!important;overflow:hidden!important;width:100%!important}
-.app-wrap{display:flex!important;flex:1!important;min-height:0!important;padding:0!important;gap:2px!important}
-.sidebar{width:15%!important;min-width:130px!important;max-width:170px!important;flex-shrink:0!important}
-.sb-header{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;margin-bottom:8px;padding:0 4px}
-.sb-grid{display:flex;flex-direction:column;gap:1px;margin-bottom:8px}
-.sb-item{display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:4px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .12s ease}
+.app-wrap{display:flex!important;flex:1!important;min-height:0!important;padding:4px 6px!important;gap:10px!important}
+.sidebar{width:14%!important;min-width:120px!important;max-width:155px!important;flex-shrink:0!important;padding-right:2px!important}
+.sb-header{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;margin-bottom:6px;padding:0 0 0 4px}
+.sb-grid{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.sb-item{display:flex;align-items:center;gap:4px;padding:3px 0 3px 6px;border-radius:4px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .12s ease}
 .sb-item:hover{background:var(--brand-bg);color:var(--brand)}
-.sb-icon{font-size:14px;width:16px;text-align:center}
-.sb-footer{font-size:10px;color:var(--text3);padding:6px 4px;border-top:1px solid var(--border);margin-top:6px}
+.sb-icon{font-size:13px;width:16px;text-align:center}
+.sb-footer{font-size:10px;color:var(--text3);padding:5px 0 3px 6px;border-top:1px solid var(--border);margin-top:4px;line-height:1.4}
 .chat-area{flex:1!important;min-width:0!important;display:flex!important;flex-direction:column!important}
 /* 历史记录 */
-.hist-header{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;margin-bottom:4px;padding:0 4px}
-.hist-empty{font-size:11px;color:var(--text3);padding:4px;text-align:center}
-.hist-item{display:flex;align-items:center;padding:4px 6px;border-radius:4px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .12s ease;margin-bottom:2px}
+.hist-header{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;margin-bottom:4px;padding:0 0 0 6px;margin-top:6px}
+.hist-empty{font-size:11px;color:var(--text3);padding:4px 6px;text-align:left}
+.hist-item{display:flex;align-items:center;padding:3px 0 3px 6px;border-radius:4px;font-size:11px;color:var(--text2);cursor:pointer;transition:all .12s ease;margin-bottom:2px}
 .hist-item:hover{background:var(--brand-bg);color:var(--brand)}
 .hist-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hist-del{font-size:10px;color:var(--text3);padding:0 4px;border-radius:3px;opacity:0;transition:opacity .12s}
 .hist-item:hover .hist-del{opacity:.6}.hist-del:hover{opacity:1!important;color:#c33!important}
-.hist-new-btn2{width:100%!important;padding:6px!important;background:var(--brand-bg)!important;color:var(--brand)!important;border:1px dashed var(--brand-light)!important;border-radius:6px!important;font-size:12px!important;font-weight:500!important;cursor:pointer!important;margin-top:4px!important}
+.hist-new-btn2{width:100%!important;padding:5px!important;background:var(--brand-bg)!important;color:var(--brand)!important;border:1px dashed var(--brand-light)!important;border-radius:6px!important;font-size:12px!important;font-weight:500!important;cursor:pointer!important;margin-top:3px!important}
 .hist-new-btn2:hover{background:rgba(111,74,142,0.08)!important}
-.logout-btn{width:100%!important;padding:6px!important;background:transparent!important;color:var(--text3)!important;border:1px solid var(--border)!important;border-radius:6px!important;font-size:11px!important;margin-top:6px!important}
+.logout-btn{width:100%!important;padding:5px!important;background:transparent!important;color:var(--text3)!important;border:1px solid var(--border)!important;border-radius:6px!important;font-size:11px!important;margin-top:6px!important}
 .logout-btn:hover{color:#c33!important;border-color:#c33!important}
+/* 欢迎页 */
+.welcome-page{display:flex!important;align-items:center!important;justify-content:center!important;height:100vh!important;width:100%!important;overflow:hidden!important}
+.welcome-inner{text-align:center;max-width:620px;padding:30px 24px}
+.wel-icon{font-size:64px;margin-bottom:12px}
+.wel-title{font-size:30px;font-weight:700;color:var(--brand);margin-bottom:6px;font-family:'ZCOOL KuaiLe',serif}
+.wel-subtitle{font-size:18px;color:var(--text);margin-bottom:20px}
+.wel-desc{font-size:14px;color:var(--text2);line-height:2;margin-bottom:20px}
+.wel-desc b{color:var(--brand)}
+.wel-start-hint{font-size:14px;color:var(--text3);margin-bottom:20px}
+.wel-start-btn{font-size:18px!important;padding:12px 44px!important;background:linear-gradient(135deg,var(--brand),var(--brand-light))!important;color:#FFF!important;border:none!important;border-radius:16px!important;font-weight:600!important;cursor:pointer!important;box-shadow:0 6px 24px rgba(111,74,142,0.25)!important;transition:all .3s ease!important}
+.wel-start-btn:hover{transform:translateY(-3px)!important;box-shadow:0 10px 36px rgba(111,74,142,0.35)!important}
 /* 欢迎与聊天 */
-.welcome-card{display:flex;align-items:center;gap:6px;padding:4px 10px;flex-shrink:0}
-.welcome-avatar{font-size:22px;flex-shrink:0}
-.welcome-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:0}
-.welcome-sub{font-size:11px;color:var(--text2)}
-.chip-bar{display:flex;flex-wrap:wrap;gap:2px;padding:0 8px 2px;justify-content:center;flex-shrink:0}
+.welcome-card{display:flex;gap:10px;padding:12px 16px 8px;flex-shrink:0;background:rgba(111,74,142,0.02);border-bottom:1px solid var(--border);margin:0 0 6px}
+.welcome-avatar{font-size:34px;flex-shrink:0;margin-top:2px}
+.welcome-title{font-size:16px;font-weight:600;color:var(--brand);margin-bottom:6px}
+.welcome-sub{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:6px}
+.welcome-tip{font-size:12px;color:var(--text3);font-style:italic}
+.chip-bar{display:flex;flex-wrap:wrap;gap:3px;padding:0 12px 4px;justify-content:center;flex-shrink:0;margin-bottom:2px}
 .chip{display:inline-flex;align-items:center;gap:2px;padding:2px 7px;background:var(--brand-bg);border:1px solid var(--border);border-radius:10px;font-size:9px;color:var(--text2);cursor:pointer;transition:all .15s ease}
 .chip:hover{background:rgba(111,74,142,0.07);border-color:var(--brand-light);color:var(--brand)}
 .chip-ico{font-size:10px}
@@ -219,10 +255,14 @@ def build_ui():
         <span class="bg-petal">🌸</span><span class="bg-petal">🌺</span><span class="bg-petal">🌸</span>
         <span class="bg-petal">🌺</span><span class="bg-petal">🌸</span></div>
         <div class="deco-bottom">
-        <span class="yuanmou-man">🗿</span>
+        <span class="yuanmou-man yuanmou1">🗿</span>
+        <span class="yuanmou-man yuanmou2">🗿</span>
+        <span class="yuanmou-man yuanmou3">🗿</span>
         <span class="shroom shroom1">🍄</span><span class="shroom shroom2">🍄</span>
         <span class="shroom shroom3">🍄</span><span class="shroom shroom4">🍄</span>
-        <span class="shroom shroom5">🍄</span>
+        <span class="shroom shroom5">🍄</span><span class="shroom shroom6">🍄</span>
+        <span class="shroom shroom7">🍄</span><span class="shroom shroom8">🍄</span>
+        <span class="shroom shroom9">🍄</span>
         <span class="torch-deco">🔥</span>
         <span class="sundial-deco">☀️</span></div>""")
 
@@ -240,7 +280,8 @@ def build_ui():
                 login_pass = gr.Textbox(label="", placeholder="密码", type="password", elem_classes="login-field", container=False)
                 login_msg = gr.HTML('<div class="login-msg"></div>')
                 login_btn_submit = gr.Button("登录", elem_classes="login-btn")
-                gr.HTML('<div class="login-reglink">还没有账号？<span class="reg-link" id="goto-reg">注册账号</span></div>')
+                gr.HTML('<div class="login-reglink">还没有账号？</div>')
+                to_reg_btn = gr.Button("注册账号", variant="link", size="sm", elem_classes="reg-link-btn")
 
         # ======== 注册页面 ========
         with gr.Column(visible=False, elem_classes="login-page") as reg_page:
@@ -252,9 +293,20 @@ def build_ui():
                 reg_pass = gr.Textbox(label="", placeholder="密码（至少3位）", type="password", elem_classes="login-field", container=False)
                 reg_msg = gr.HTML('<div class="login-msg"></div>')
                 reg_btn_submit = gr.Button("注册", elem_classes="login-btn")
-                gr.HTML('<div class="login-reglink">已有账号？<span class="reg-link" id="goto-login">返回登录</span></div>')
+                gr.HTML('<div class="login-reglink">已有账号？</div>')
+                to_log_btn = gr.Button("返回登录", variant="link", size="sm", elem_classes="reg-link-btn")
 
-        # ======== 主页面（登录后） ========
+        # ======== 欢迎页面（登录后先显示） ========
+        with gr.Column(visible=False, elem_classes="welcome-page") as welcome_page:
+            with gr.Column(elem_classes="welcome-inner"):
+                gr.HTML('<div class="wel-icon">🎓</div>')
+                gr.HTML('<div class="wel-title">同学你好呀！👋</div>')
+                gr.HTML('<div class="wel-subtitle">欢迎来到楚雄师范学院校园智能助手</div>')
+                gr.HTML('<div class="wel-desc">我是你的专属校园AI小助手，知识库里有10篇校园文档、200条知识片段。<br><br>📚 无论是<b>图书馆几点开门</b>、🏠 <b>宿舍几点关门</b>、🍜 <b>食堂用餐</b><br>🎓 <b>奖学金怎么申请</b>、📖 教务选课、🌐 校园网络、🏥 校医院、🧠 心理咨询<br><br>关于校园生活的任何问题，随时问我！我会基于知识库给你准确、有据可依的答案。</div>')
+                gr.HTML('<div class="wel-start-hint">准备好了吗？点击下方按钮开始咨询～</div>')
+                start_btn = gr.Button("🚀 开始咨询", elem_classes="wel-start-btn")
+
+        # ======== 主页面（点击开始咨询后） ========
         with gr.Column(visible=False, elem_classes="main-page") as main_page:
             gr.HTML(f"""<div class="navbar"><div class="nav-left">
             <div class="nav-logo">🎓</div><div class="nav-title">楚雄师范学院</div><div class="nav-title-sub">校园智能助手</div>
@@ -294,7 +346,7 @@ def build_ui():
             cid = auth.create_conversation(uid, "新对话")
             SESSION["conv_id"] = cid; SESSION["messages"] = []
             convs = auth.get_user_conversations(uid)
-            return '<div class="login-msg"></div>', gr.update(visible=False), gr.update(visible=False), gr.update(visible=True), convs
+            return '<div class="login-msg"></div>', gr.update(visible=False), gr.update(visible=False), gr.update(visible=True), gr.update(visible=False), convs
 
         def on_register(user, pwd):
             ok, msg = auth.register(user, pwd)
@@ -302,10 +354,13 @@ def build_ui():
                 return '<div class="login-msg ok">注册成功，请登录</div>', gr.update(visible=True), gr.update(visible=False)
             return f'<div class="login-msg">{msg}</div>', gr.update(), gr.update()
 
-        login_btn_submit.click(on_login, [login_user, login_pass], [login_msg, login_page, reg_page, main_page, convs_state])
+        login_btn_submit.click(on_login, [login_user, login_pass], [login_msg, login_page, reg_page, welcome_page, main_page, convs_state])
         reg_btn_submit.click(on_register, [reg_user, reg_pass], [reg_msg, login_page, reg_page])
 
-        # ======== 历史记录刷新 ========
+        # ======== 登出/切换 ========
+        start_btn.click(lambda: (gr.update(visible=False), gr.update(visible=True)), None, [welcome_page, main_page])
+        to_reg_btn.click(lambda: (gr.update(visible=False), gr.update(visible=True)), None, [login_page, reg_page])
+        to_log_btn.click(lambda: (gr.update(visible=True), gr.update(visible=False)), None, [login_page, reg_page])
         def refresh_hist(convs):
             if not convs:
                 return '<div class="hist-empty">暂无历史对话</div>'
@@ -358,9 +413,9 @@ def build_ui():
         def do_logout():
             SESSION["user_id"] = None; SESSION["username"] = None
             SESSION["conv_id"] = None; SESSION["messages"] = []
-            return gr.update(visible=True), gr.update(visible=False), gr.update(visible=False), gr.update()
+            return gr.update(visible=True), gr.update(visible=False), gr.update(visible=False), gr.update(visible=False), gr.update()
 
-        logout_btn.click(do_logout, None, [login_page, main_page, reg_page, convs_state])
+        logout_btn.click(do_logout, None, [login_page, welcome_page, main_page, reg_page, convs_state])
 
     return demo
 
