@@ -110,7 +110,7 @@ SIDEBAR_ITEMS = [
     ("🚗", "出行"), ("🧠", "心理"), ("🎒", "新生"), ("📋", "毕业"),
 ]
 
-CUSTOM_CSS = """@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+CUSTOM_CSS = """@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Liu+Jian+Mao+Cao&display=swap');
 :root{--brand:#6F4A8E;--brand-light:#A07FC0;--brand-bg:rgba(111,74,142,0.04);--bg:#F7F4F9;--card:#FFF;--text:#1E1F23;--text2:#6A6E78;--text3:#ADB0B8;--border:#E8E3EC;--green:#789978;--green-bg:rgba(120,153,120,0.07);--shadow:0 8px 32px rgba(111,74,142,0.05)}
 *{-webkit-font-smoothing:antialiased}
 body{background:var(--bg)!important;margin:0}
@@ -124,13 +124,19 @@ body{background:var(--bg)!important;margin:0}
 .deco-bg .bg-petal:nth-child(7){left:74%;animation-delay:7s;font-size:28px}.deco-bg .bg-petal:nth-child(8){left:86%;animation-delay:2s;font-size:26px}
 .deco-bg .bg-petal:nth-child(9){left:92%;animation-delay:4.5s;font-size:32px}.deco-bg .bg-petal:nth-child(10){left:96%;animation-delay:6.5s;font-size:24px}
 /* 底部装饰 */
-@keyframes rockWave{0%,100%{transform:translateY(0) rotate(-3deg);opacity:0.04}50%{transform:translateY(-5px) rotate(3deg);opacity:0.06}}
-@keyframes shroomFloat{0%,100%{transform:translateY(0);opacity:0.03}50%{transform:translateY(-8px);opacity:0.05}}
-.deco-bottom{position:fixed;bottom:0;left:0;right:0;z-index:0;pointer-events:none;height:100px}
-.yuanmou-man{position:fixed;bottom:30px;right:50px;font-size:38px;animation:rockWave 6s ease-in-out infinite}
-.shroom{position:fixed;bottom:25px;font-size:24px;animation:shroomFloat 4s ease-in-out infinite}
-.shroom1{left:300px}.shroom2{left:370px;animation-delay:.8s}.shroom3{left:440px;animation-delay:1.6s}
-.shroom4{left:510px;animation-delay:2.4s}.shroom5{left:580px;animation-delay:3.2s}
+@keyframes rockWave{0%,100%{transform:translateY(0) rotate(-3deg);opacity:0.06}50%{transform:translateY(-6px) rotate(3deg);opacity:0.1}}
+@keyframes shroomFloat{0%,100%{transform:translateY(0);opacity:0.04}50%{transform:translateY(-10px);opacity:0.07}}
+@keyframes fireGlow{0%,100%{opacity:0.04;transform:scale(1)}50%{opacity:0.08;transform:scale(1.15)}}
+@keyframes sundialRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.deco-bottom{position:fixed;bottom:0;left:0;right:0;z-index:9999;pointer-events:none;height:120px}
+.yuanmou-man{position:fixed;bottom:25px;right:40px;font-size:42px;animation:rockWave 5s ease-in-out infinite;z-index:9999}
+.shroom{position:fixed;bottom:20px;font-size:26px;animation:shroomFloat 4.5s ease-in-out infinite;z-index:9999}
+.shroom1{left:280px}.shroom2{left:345px;animation-delay:.8s}.shroom3{left:410px;animation-delay:1.6s}
+.shroom4{left:475px;animation-delay:2.4s}.shroom5{left:540px;animation-delay:3.2s}
+/* 火把 */
+.torch-deco{position:fixed;bottom:35px;left:35px;font-size:30px;animation:fireGlow 3s ease-in-out infinite;z-index:9999}
+/* 太阳历 */
+.sundial-deco{position:fixed;top:75px;right:30px;font-size:22px;opacity:0.06;animation:sundialRotate 30s linear infinite;z-index:9999;pointer-events:none}
 /* 登录/注册 */
 .login-page{display:flex!important;align-items:center!important;justify-content:center!important;min-height:100vh!important}
 .login-box{width:320px;text-align:center}
@@ -147,18 +153,18 @@ body{background:var(--bg)!important;margin:0}
 .reg-link{color:#36c;cursor:pointer;font-weight:500;text-decoration:underline}
 .reg-link:hover{color:#1a4fa0}
 /* 导航 */
-.navbar{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.6)}
-.nav-left{display:flex;align-items:center;gap:10px}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:4px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.6);flex-shrink:0}
+.nav-left{display:flex;align-items:center;gap:8px}
 .nav-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-light));display:flex;align-items:center;justify-content:center;font-size:14px;color:white}
-.nav-title{font-size:28px;font-weight:700;color:var(--brand);letter-spacing:.5px;font-family:'Noto Serif SC','Inter',serif}
-.nav-title-sub{font-size:14px;color:var(--text2)}
+.nav-title{font-size:32px;font-weight:400;color:var(--brand);letter-spacing:4px;font-family:'Liu Jian Mao Cao','Ma Shan Zheng','Noto Serif SC',serif;line-height:1.1;transform:scaleY(1.05)}
+.nav-title-sub{font-size:14px;color:var(--text2);font-family:'Noto Serif SC',serif}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-stat{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--green-bg);animation:pulse 2.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.2}}
 /* 主布局 */
 .main-page{display:flex!important;flex-direction:column!important;flex:1!important;height:100vh!important;overflow:hidden!important;width:100%!important}
-.app-wrap{display:flex!important;flex:1!important;min-height:0!important;padding:0 1px!important;gap:4px!important}
+.app-wrap{display:flex!important;flex:1!important;min-height:0!important;padding:0!important;gap:2px!important}
 .sidebar{width:15%!important;min-width:130px!important;max-width:170px!important;flex-shrink:0!important}
 .sb-header{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;margin-bottom:8px;padding:0 4px}
 .sb-grid{display:flex;flex-direction:column;gap:1px;margin-bottom:8px}
@@ -180,11 +186,11 @@ body{background:var(--bg)!important;margin:0}
 .logout-btn{width:100%!important;padding:6px!important;background:transparent!important;color:var(--text3)!important;border:1px solid var(--border)!important;border-radius:6px!important;font-size:11px!important;margin-top:6px!important}
 .logout-btn:hover{color:#c33!important;border-color:#c33!important}
 /* 欢迎与聊天 */
-.welcome-card{display:flex;align-items:center;gap:8px;padding:8px 14px}
-.welcome-avatar{font-size:28px;flex-shrink:0}
-.welcome-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:1px}
-.welcome-sub{font-size:12px;color:var(--text2)}
-.chip-bar{display:flex;flex-wrap:wrap;gap:3px;padding:0 12px 4px;justify-content:center}
+.welcome-card{display:flex;align-items:center;gap:6px;padding:4px 10px;flex-shrink:0}
+.welcome-avatar{font-size:22px;flex-shrink:0}
+.welcome-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:0}
+.welcome-sub{font-size:11px;color:var(--text2)}
+.chip-bar{display:flex;flex-wrap:wrap;gap:2px;padding:0 8px 2px;justify-content:center;flex-shrink:0}
 .chip{display:inline-flex;align-items:center;gap:2px;padding:2px 7px;background:var(--brand-bg);border:1px solid var(--border);border-radius:10px;font-size:9px;color:var(--text2);cursor:pointer;transition:all .15s ease}
 .chip:hover{background:rgba(111,74,142,0.07);border-color:var(--brand-light);color:var(--brand)}
 .chip-ico{font-size:10px}
@@ -216,7 +222,9 @@ def build_ui():
         <span class="yuanmou-man">🗿</span>
         <span class="shroom shroom1">🍄</span><span class="shroom shroom2">🍄</span>
         <span class="shroom shroom3">🍄</span><span class="shroom shroom4">🍄</span>
-        <span class="shroom shroom5">🍄</span></div>""")
+        <span class="shroom shroom5">🍄</span>
+        <span class="torch-deco">🔥</span>
+        <span class="sundial-deco">☀️</span></div>""")
 
         user_state = gr.State(None)
         convs_state = gr.State([])
